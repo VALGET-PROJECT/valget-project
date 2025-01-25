@@ -40,34 +40,43 @@ const Footer = () => {
           sx={{ width: 80, height: 80 }}
         />
         <Stack direction="row" spacing={1}>
+            <Link href="https://www.facebook.com/ValGet.Project">
           <Box sx={{backgroundImage:'linear-gradient(225deg, #007BFF 14.89%, #933FFE 85.85%)',p:'2px',borderRadius:'5px'}}>
-          <IconButton color="inherit" aria-label="Facebook" sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px'}}>
+          <IconButton color="inherit" aria-label="Facebook" sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px',color:'white'}}>
             <Facebook />
           </IconButton>
           </Box>
+            </Link>
+            <Link href='https://x.com/VALGET_PROJECT'>
           <Box sx={{backgroundImage:'linear-gradient(225deg, #007BFF 14.89%, #933FFE 85.85%)',p:'2px',borderRadius:'5px'}}>
-          <IconButton color="inherit" aria-label="Twitter"  sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px'}}>
+          <IconButton color="inherit" aria-label="Twitter"  sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px',color:'white'}}>
             <Twitter />
           </IconButton>
           </Box>
-          <Box sx={{backgroundImage:'linear-gradient(225deg, #007BFF 14.89%, #933FFE 85.85%)',p:'2px',borderRadius:'5px'}}>
+            </Link>
 
-          <IconButton color="inherit" aria-label="YouTube"  sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px'}}>
+          <Link href="https://www.youtube.com/@VALGET_PROJECT/videos">
+          <Box sx={{backgroundImage:'linear-gradient(225deg, #007BFF 14.89%, #933FFE 85.85%)',p:'2px',borderRadius:'5px'}}>
+          <IconButton color="inherit" aria-label="YouTube"  sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px',color:'white'}}>
             <YouTube />
           </IconButton>
           </Box>
+            </Link>
+
+            <Link href='https://t.me/VALGET_PROJECT_ANNOUNCEMENT'>
           <Box sx={{backgroundImage:'linear-gradient(225deg, #007BFF 14.89%, #933FFE 85.85%)',p:'2px',borderRadius:'5px'}}>
 
-          <IconButton color="inherit" aria-label="Telegram"  sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px'}}>
+          <IconButton color="inherit" aria-label="Telegram"  sx={{background:'#1A1A2E',borderRadius:'0px',width:'30px',height:'30px',color:'white'}}>
             <Telegram />
           </IconButton>
           </Box>
+            </Link>
         </Stack>
         <Typography
           variant="body2"
           sx={{ display: 'flex', alignItems: 'center', gap: 1 ,fontFamily:'DM Sans'}}
         >
-          <Email sx={{ fontSize: 20 }} />
+          <img src='/mail.png' style={{ width:'25px' }} />
           valget.project2024@gmail.com
         </Typography>
       </Box>
@@ -83,17 +92,17 @@ const Footer = () => {
           Quick Links
         </Typography>
         <Stack spacing={1}>
-          <Link href="#" color="inherit" underline="hover" style={{fontFamily:'DM Sans'}}>
-            Home
+          <Link href="https://valget-project.com/" color="inherit" underline="hover" style={{fontFamily:'DM Sans',display:'flex',alignItems:'center',textDecoration:'none'}}>
+            Home <ArrowForward sx={{fontSize:'1em',position:'relative',rotate:'-50deg',top:'0px',left:'6px'}}/>
           </Link>
-          <Link href="#" color="inherit" underline="hover" style={{fontFamily:'DM Sans'}}>
-            Sub-Platforms
+          <Link href="https://valget-project.com/sub-platforms/" color="inherit" underline="hover" style={{fontFamily:'DM Sans',display:'flex',alignItems:'center',textDecoration:'none'}}>
+            Sub-Platforms <ArrowForward sx={{fontSize:'1em',position:'relative',rotate:'-50deg',top:'0px',left:'6px'}}/>
           </Link>
-          <Link href="#" color="inherit" underline="hover" style={{fontFamily:'DM Sans'}}>
-            Blogs
+          <Link href="https://valget-project.com/blogs/" color="inherit" underline="hover" style={{fontFamily:'DM Sans',display:'flex',alignItems:'center',textDecoration:'none'}}>
+            Blogs <ArrowForward sx={{fontSize:'1em',position:'relative',rotate:'-50deg',top:'0px',left:'6px'}}/>
           </Link>
-          <Link href="#" color="inherit" underline="hover" style={{fontFamily:'DM Sans'}}>
-            Contact
+          <Link href="https://valget-project.com/contact/" color="inherit" underline="hover" style={{fontFamily:'DM Sans',display:'flex',alignItems:'center',textDecoration:'none'}}>
+            Contact <ArrowForward sx={{fontSize:'1em',position:'relative',rotate:'-50deg',top:'0px',left:'6px'}}/>
           </Link>
         </Stack>
       </Box>
@@ -110,7 +119,7 @@ const Footer = () => {
           Receive transmissions
         </Typography>
         <Typography variant="body2" gutterBottom fontFamily={'DM Sans'}>
-          Unsubscribe at any time. Privacy policy
+          <span style={{color:'gray'}}>Unsubscribe at any time.</span> Privacy policy <ArrowForward sx={{fontSize:'1.1em',position:'relative',rotate:'-50deg',top:'3px',left:'3px'}}/>
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, mt: 2, justifyContent: 'center' ,position:'relative'}}>
           <TextField

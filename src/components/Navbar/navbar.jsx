@@ -23,7 +23,7 @@ const Navbar = () => {
     setDrawerOpen(!drawerOpen);
   };
 
-  const navLinks = ["Home", "Sub-Platforms", "Presale", "Blogs", "Contact"];
+  const navLinks = [<a href='https://valget-project.com/' style={{color:'white',textDecoration:'none'}}>Home</a>, <a href='https://valget-project.com/sub-platforms/' style={{color:'white',textDecoration:'none'}}>Sub-Platforms</a>, <a href='#' style={{color:'white',textDecoration:'none'}}>Presale</a>,<a href='https://valget-project.com/blogs/' style={{color:'white',textDecoration:'none'}}>Blogs</a>,<a href='https://valget-project.com/contact/' style={{color:'white',textDecoration:'none'}}>Contact</a>];
 
   // Ticker items (example data)
   const tickerItems = Array(10).fill({
@@ -75,13 +75,19 @@ const Navbar = () => {
           </Box>
 
           {/* Buttons (Mobile and Desktop) */}
-          <Box sx={{ display: { lg: 'none', xs: 'block' } }}>
+          <Box sx={{
+            display: {
+              xs: 'none', 
+              md: 'block',  
+            },
+          }}>
             <Button
               variant="contained"
               sx={{
                 backgroundColor: "#0163ED",
                 color: "white",
                 textTransform: "none",
+                mr:1,
                 "&:hover": { backgroundColor: "#0056c8" },
               }}
             >
