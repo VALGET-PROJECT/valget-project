@@ -80,7 +80,11 @@ const Presale = () => {
     };
   }, []);
   const match = useMediaQuery("(max-width:900px)");
-  const { publicKey, sendTransaction: sendWalletTx } = useWallet();
+  const {
+    publicKey,
+    sendTransaction: sendWalletTx,
+    signTransaction,
+  } = useWallet();
   const wallet = useWallet();
   const [From, setFrom] = useState("");
   const [ToToken, setToToken] = useState("");
@@ -279,17 +283,7 @@ const Presale = () => {
           message: "Enter a valid value to buy.",
         });
       }
-      // if (
-      //   (tokenType === 2 && From < 15) ||
-      //   (tokenType === 1 && From * presaleData.oneSolPrice < 15)
-      // ) {
-      //   return setnotificationProps({
-      //     ...notificationProps,
-      //     modal: true,
-      //     error: true,
-      //     message: "Minimum amount to buy is $15.",
-      //   });
-      // }
+
       if (ToToken > presaleData.remaining) {
         let fromAmount = 0;
         if (tokenType == 1) {
@@ -312,9 +306,9 @@ const Presale = () => {
       }
 
       setloading(true);
-      console.log(presaleData, "presaleData");
+
       const userAccount = Keypair.generate();
-      let {
+      const {
         presaleAccount,
         owner,
         ownerUsdtAccount,
@@ -323,6 +317,7 @@ const Presale = () => {
         usdtMint,
         presaleKeys,
       } = presaleData;
+
       const [
         [presalePda, bump],
         { decimals: usdtDecimals },
@@ -337,6 +332,7 @@ const Presale = () => {
         getMint(connection, usdcMint),
         connection.getLatestBlockhash("finalized"),
       ]);
+
       let instructions = [];
       const associateUsdtAccount = getAssociatedTokenAddressSync(
         usdtMint,
@@ -346,8 +342,6 @@ const Presale = () => {
       try {
         await getAccount(connection, associateUsdtAccount);
       } catch (error) {
-        console.log(error);
-
         instructions.push(
           createAssociatedTokenAccountIdempotentInstruction(
             publicKey,
@@ -357,15 +351,15 @@ const Presale = () => {
           )
         );
       }
+
       const associateUsdcAccount = getAssociatedTokenAddressSync(
         usdcMint,
         publicKey
       );
+
       try {
         await getAccount(connection, associateUsdcAccount);
       } catch (error) {
-        console.log(error);
-
         instructions.push(
           createAssociatedTokenAccountIdempotentInstruction(
             publicKey,
@@ -375,9 +369,10 @@ const Presale = () => {
           )
         );
       }
-      console.log(Number(usdtDecimals), Number(usdcDecimals), "usdtDecimals");
+
+      let transaction;
       if (userData?.userAccount) {
-        const tx = await presaleProgram.methods
+        transaction = await presaleProgram.methods
           .existingBuy(
             new anchor.BN(+parseUnits(From, 9)),
             new anchor.BN(+tokenType),
@@ -402,22 +397,9 @@ const Presale = () => {
             systemProgram: SystemProgram.programId,
           })
           .preInstructions(instructions)
-          .signers([])
-          .rpc();
-        // tx.recentBlockhash = blockhash;
-        // tx.lastValidBlockHeight = lastValidBlockHeight;
-        // tx.feePayer = publicKey;
-        // const sign = await sendWalletTx(tx, connection, {
-        //   signers: [],
-        // });
-        // console.log(tx, "sign");
-        // await connection.confirmTransaction({
-        //   signature: sign,
-        //   blockhash,
-        //   lastValidBlockHeight,
-        // });
+          .transaction();
       } else {
-        const tx = await presaleProgram.methods
+        transaction = await presaleProgram.methods
           .buy(
             new anchor.BN(+parseUnits(From, 9)),
             new anchor.BN(+tokenType),
@@ -442,20 +424,24 @@ const Presale = () => {
             systemProgram: SystemProgram.programId,
           })
           .preInstructions(instructions)
-          .signers([userAccount])
-          .rpc();
-        // tx.recentBlockhash = blockhash;
-        // tx.lastValidBlockHeight = lastValidBlockHeight;
-        // tx.feePayer = publicKey;
-        // const sign = await sendWalletTx(tx, connection, {
-        //   signers: [userAccount],
-        // });
-        // await connection.confirmTransaction({
-        //   signature: sign,
-        //   blockhash,
-        //   lastValidBlockHeight,
-        // });
+          .transaction();
       }
+      transaction.recentBlockhash = blockhash;
+      transaction.lastValidBlockHeight = lastValidBlockHeight;
+      transaction.feePayer = publicKey;
+      // Sign and send the transaction using the connected wallet
+      const signedTransaction = await signTransaction(transaction);
+      const signature = await connection.sendRawTransaction(
+        signedTransaction.serialize()
+      );
+
+      // Confirm the transaction
+      await connection.confirmTransaction({
+        signature,
+        blockhash,
+        lastValidBlockHeight,
+      });
+
       setnotificationProps({
         modal: true,
         message: "Transaction Confirmed",
@@ -546,7 +532,7 @@ const Presale = () => {
       }
 
       let { userAccount } = userData;
-      const tx = await presaleProgram.methods
+      const transaction = await presaleProgram.methods
         .claim()
         .accounts({
           userAccount,
@@ -563,18 +549,22 @@ const Presale = () => {
         })
         .preInstructions(instructions)
         .signers([])
-        .rpc();
-      // tx.recentBlockhash = blockhash;
-      // tx.lastValidBlockHeight = lastValidBlockHeight;
-      // tx.feePayer = publicKey;
-      // const sign = await sendWalletTx(tx, connection, {
-      //   signers: [],
-      // });
-      // await connection.confirmTransaction({
-      //   signature: sign,
-      //   blockhash,
-      //   lastValidBlockHeight,
-      // });
+        .transaction();
+      transaction.recentBlockhash = blockhash;
+      transaction.lastValidBlockHeight = lastValidBlockHeight;
+      transaction.feePayer = publicKey;
+      // Sign and send the transaction using the connected wallet
+      const signedTransaction = await signTransaction(transaction);
+      const signature = await connection.sendRawTransaction(
+        signedTransaction.serialize()
+      );
+
+      // Confirm the transaction
+      await connection.confirmTransaction({
+        signature,
+        blockhash,
+        lastValidBlockHeight,
+      });
 
       setnotificationProps({
         modal: true,
@@ -1398,7 +1388,7 @@ const Presale = () => {
           >
             <Typography
               fontFamily="Archivo"
-              variant="h3"
+              variant="h3="
               color="#00FF99"
               my={3}
             >

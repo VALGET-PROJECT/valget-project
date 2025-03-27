@@ -12,22 +12,22 @@ export const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
 
 //token
 export const mint = new PublicKey(
-  // "63vAeE4KHU6xv1YzJCYXQZB1WNjpE4nvaUMD6FrE9qhz" //mainnet
-  "9mij72iuy1w8k7Pt6fHqPzLxodH3sCKH9CvQXbihT4KW" //testnet
+  "9djyWjVWB7i9dDG7h1se9Qks4tnfiFJTA833WPzmmfDM" //mainnet
+  // "9mij72iuy1w8k7Pt6fHqPzLxodH3sCKH9CvQXbihT4KW" //testnet
 );
 //usdt token
 export const usdtMint = new PublicKey(
-  // "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
-  "3go44AHHGYpHFkb51UvXu3zD1N8fzAjuQohjaCofpAnv" //testnet
+  "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
+  // "3go44AHHGYpHFkb51UvXu3zD1N8fzAjuQohjaCofpAnv" //testnet
 );
 export const usdcMint = new PublicKey(
-  // "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
-  "GqtuQ5MppuEbAL1j6eNZy3QEkZPWu1yv81cTae1fmsYY" //testnet
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+  // "GqtuQ5MppuEbAL1j6eNZy3QEkZPWu1yv81cTae1fmsYY" //testnet
 );
 // chainlink price feed
 export const chainlinkFeed = new PublicKey(
-  "99B2bTijsU6f1GCT73HmdR7HCFFjGMBcPZY6jZ96ynrR" // testnet
-  // "CH31Xns5z3M1cTAbKW34jcxPPciazARpijcHj9rxtemt" //mainnet
+  // "99B2bTijsU6f1GCT73HmdR7HCFFjGMBcPZY6jZ96ynrR" // testnet
+  "CH31Xns5z3M1cTAbKW34jcxPPciazARpijcHj9rxtemt" //mainnet
 );
 // chainlink program id
 export const chainlinkProgram = new PublicKey(
@@ -35,7 +35,7 @@ export const chainlinkProgram = new PublicKey(
 );
 //Admin Publickey ;
 export const adminPublickey = new PublicKey(
-  // "28z2dRs3XUzQk11amy6fsj9dnmnS6PLixKBRmPKytYwh"
+  "EQg4kBFsGyKa7mgVPSiyzLKxGZQCmUs8L3ziSPN2cbwt"
   // "CDQn1VpD1nAuK4C3svdR6ZKw5evWoLg5qLzPGScC7oYn"
-  "5dMg7H3ZGTc5x5KdP4ofrenvxb4vc3ASLixsF55BZM6s"
+  // "5dMg7H3ZGTc5x5KdP4ofrenvxb4vc3ASLixsF55BZM6s"
 );

@@ -17,12 +17,11 @@ import {
   UnsafeBurnerWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 
-const endpoint =
-  // "https://rpc.shyft.to?api_key=FuUIqFNPQQ7OfcCj";
-  "https://devnet-rpc.shyft.to?api_key=FuUIqFNPQQ7OfcCj";
+const endpoint = "https://rpc.shyft.to?api_key=FuUIqFNPQQ7OfcCj";
+// "https://devnet-rpc.shyft.to?api_key=FuUIqFNPQQ7OfcCj";
 
 const AppWrapper = () => {
-  const network = WalletAdapterNetwork.Devnet; // Adjust the network as needed
+  const network = WalletAdapterNetwork.Mainnet; // Adjust the network as needed
 
   const wallets = useMemo(
     () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
